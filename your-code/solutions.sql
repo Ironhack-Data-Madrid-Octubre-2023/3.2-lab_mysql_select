@@ -13,3 +13,19 @@ inner join publishers -- luego paso a coger el nombre del publisher vía el pub_
 on titles.pub_id = publishers.pub_id;
 
 
+-- Challenge 3
+SELECT 
+    a.au_id AS AUTHOR_ID,
+    a.au_lname AS LAST_NAME,
+    a.au_fname AS FIRST_NAME,
+    p.pub_name AS PUBLISHER,
+    COUNT(ta.title_id) AS TITLE_COUNT
+FROM
+    authors AS a
+        INNER JOIN
+    titleauthor AS ta ON a.au_id = ta.au_id
+        INNER JOIN
+    titles AS t ON ta.title_id = t.title_id
+        INNER JOIN
+    publishers AS p ON t.pub_id = p.pub_id
+GROUP BY p.pub_id , a.au_id;
