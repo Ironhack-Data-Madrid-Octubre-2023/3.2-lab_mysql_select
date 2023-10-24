@@ -22,6 +22,7 @@ SELECT
     au.au_fname AS 'FIRST NAME',
     pub.pub_name AS 'PUBLISHER',
     COUNT(tit.title) > 0 AS 'TITLE COUNT'
+	
 FROM publications.authors as au
 LEFT JOIN titleauthor AS titau ON au.au_id = titau.au_id
 LEFT JOIN titles as tit ON titau.title_id = tit.title_id
