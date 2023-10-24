@@ -55,7 +55,7 @@ SELECT
     a.au_lname AS last_name,
     a.au_fname AS first_name,
     p.pub_name AS publisher,
-    s.qty AS total_sales
+    SUM(s.qty) AS total_sales
 FROM
     publications.authors AS a
 JOIN
@@ -84,7 +84,7 @@ SELECT
     a.au_id AS author_id,
     a.au_lname AS last_name,
     a.au_fname AS first_name,
-    COALESCE(s.qty, 0) AS total_sales
+    COALESCE(SUM(s.qty), 0) AS total_sales
 FROM
     publications.authors AS a
 LEFT JOIN
@@ -99,5 +99,5 @@ LEFT JOIN
     publications.sales AS s
 ON
     t.title_id = s.title_id
+GROUP BY author_id, last_name, first_name
 ORDER BY total_sales DESC;
-
