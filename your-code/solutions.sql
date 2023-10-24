@@ -39,14 +39,27 @@ SELECT
     SUM(s.qty) AS TOTAL
 FROM
     authors AS a
-        INNER JOIN
+        LEFT JOIN
     titleauthor AS ta ON a.au_id = ta.au_id
-        INNER JOIN
-    titles AS t ON ta.title_id = t.title_id
-        INNER JOIN
-    sales AS s ON t.title_id = s.title_id
-GROUP BY s.title_id , a.au_id
+        LEFT JOIN
+    sales AS s ON ta.title_id = s.title_id
+GROUP BY a.au_id
 ORDER BY TOTAL DESC
-LIMIT 3;
+limit 3;
 
+
+-- Challenge 4
+SELECT 
+    a.au_id AS AUTHOR_ID,
+    a.au_lname AS LAST_NAME,
+    a.au_fname AS FIRST_NAME,
+    SUM(s.qty) AS TOTAL
+FROM
+    authors AS a
+        LEFT JOIN
+    titleauthor AS ta ON a.au_id = ta.au_id
+        LEFT JOIN
+    sales AS s ON ta.title_id = s.title_id
+GROUP BY a.au_id
+ORDER BY TOTAL DESC;
 
