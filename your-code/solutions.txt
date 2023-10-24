@@ -1,0 +1,57 @@
+-- Challenge 1
+select  a.au_id as AUTHOR_ID, a.au_lname as Last_Name, a.au_fname as First_Name, t.title as Title, pb.pub_name AS Publisher
+from authors as a
+inner join titleauthor as ta 
+on a.au_id = ta.au_id
+inner join titles as t 
+on ta.title_id = t.title_id
+left join publishers as pb on t.pub_id = pb.pub_id;
+
+
+-- Challenge 2
+
+select  a.au_id as AUTHOR_ID, a.au_lname as Last_Name, a.au_fname as First_Name, count(t.title) AS 'TOTALS COUNTS' 
+from authors as a
+inner join titleauthor as ta 
+on a.au_id = ta.au_id
+inner join titles as t 
+on ta.title_id = t.title_id
+left join publishers as pb on t.pub_id = pb.pub_id
+
+group by
+    a.au_id, a.au_lname, a.au_fname, pb.pub_name
+
+-- Challenge 3
+
+select a.au_id as AUTHOR_ID, a.au_lname as Last_Name, a.au_fname as First_Name, t.title as Title,count(s.title_id) as Total_Sales
+from authors as a
+left join titleauthor as ta 
+on a.au_id = ta.au_id
+left join titles as t 
+on ta.title_id = t.title_id
+left join sales as s 
+on t.title_id = s.title_id
+
+group by
+    a.au_id, a.au_lname, a.au_fname, t.title
+order by
+    Total_Sales DESC;
+LIMIT 3;
+
+-- Challenge 4
+
+SELECT a.au_id as AUTHOR_ID, a.au_lname as Last_Name, a.au_fname as First_Name, t.title as Title,
+    ifnull(count(s.title_id), 0) as Total_Sales
+from authors as a
+inner join titleauthor as ta 
+on a.au_id = ta.au_id
+inner join titles as t 
+on ta.title_id = t.title_id
+left join sales as s 
+on t.title_id = s.title_id
+
+group by
+    a.au_id, a.au_lname, a.au_fname, t.title
+order by
+    Total_Sales DESC
+    Total_Sales desc;
