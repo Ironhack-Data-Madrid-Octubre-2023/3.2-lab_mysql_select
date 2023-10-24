@@ -74,3 +74,19 @@ Now modify your solution in Challenge 3 so that the output will display all 23 a
 [MySQL Reference: Group By](https://dev.mysql.com/doc/refman/8.0/en/group-by-modifiers.html)
 
 [MySQL Reference: SUM Function](https://dev.mysql.com/doc/refman/8.0/en/group-by-functions.html#function_sum)
+
+
+
+## Interesting Links
+
+https://www.w3schools.com/mysql/mysql_join_inner.asp
+
+### INNER JOIN
+```SQL
+
+SELECT column_name(s)
+FROM table1
+INNER JOIN table2
+ON table1.column_name = table2.column_name;
+
+```
