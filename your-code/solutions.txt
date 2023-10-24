@@ -20,7 +20,6 @@ left join publishers as pb on t.pub_id = pb.pub_id
 
 group by
     a.au_id, a.au_lname, a.au_fname, pb.pub_name
-LIMIT 3;
 
 -- Challenge 3
 
@@ -37,7 +36,7 @@ group by
     a.au_id, a.au_lname, a.au_fname, t.title
 order by
     Total_Sales DESC;
-
+LIMIT 3;
 
 -- Challenge 4
 
