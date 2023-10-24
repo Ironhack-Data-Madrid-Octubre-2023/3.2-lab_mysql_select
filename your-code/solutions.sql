@@ -24,16 +24,16 @@ SELECT
   au_lname AS `LAST NAME`,
   au_fname AS `FIRST NAME`,
   publishers.pub_name AS `PUBLISHER`,
-  COUNT(titleauthor.title_id) AS `TITLE COUNT`
+  COUNT(titles.title) AS `TITLE COUNT`
 FROM authors
-INNER JOIN titleauthor 
+LEFT JOIN titleauthor 
 	ON authors.au_id = titleauthor.au_id
-LEFT JOIN titles 
+INNER JOIN titles 
 	ON titleauthor.title_id = titles.title_id
-LEFT JOIN publishers 
+INNER JOIN publishers 
 	ON titles.pub_id = publishers.pub_id
-GROUP BY titleauthor.title_id, authors.au_id, au_lname, au_fname
-ORDER BY authors.au_id DESC
+GROUP BY authors.au_id, au_lname, au_fname, publishers.pub_name
+ORDER BY `TITLE COUNT` DESC
 
 --- Challenge 3
 --- 3 rows
@@ -70,4 +70,3 @@ LEFT JOIN sales
 	ON titles.title_id = sales.title_id
 GROUP BY authors.au_id, au_lname, au_fname
 ORDER BY `TOTAL` DESC
-
