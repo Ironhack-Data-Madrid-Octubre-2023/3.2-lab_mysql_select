@@ -27,7 +27,8 @@ left join titles as t
  left join sales as sa
  on t.title_id =sa.title_id
  group by a.au_id,a.au_lname,a.au_fname
- order by sum(sa.qty) desc;
+ order by sum(sa.qty) desc
+ limit 3;
 
 -- Challenge 4
 select a.au_id,a.au_lname,a.au_fname, coalesce(sum(sa.qty),0) from authors as a
@@ -39,4 +40,4 @@ left join titles as t
  on t.title_id =sa.title_id
  group by a.au_id,a.au_lname,a.au_fname
  order by sum(sa.qty) desc
- limit 3;
+ ;
