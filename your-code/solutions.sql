@@ -46,4 +46,6 @@ FROM
         INNER JOIN
     sales AS s ON s.title_id = s.title_id
 GROUP BY s.title_id , a.au_id
+ORDER BY TOTAL DESC
 LIMIT 3;
+
