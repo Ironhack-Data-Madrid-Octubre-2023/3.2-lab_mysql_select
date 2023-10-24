@@ -19,7 +19,7 @@ SELECT
     au.au_id AS 'AUTHOR ID',
     au_lname AS 'LAST NAME',
     au_fname AS 'FIRST NAME',
-	pb.pub_name AS 'PUBLISHER', -- #4
+	pb.pub_name AS 'PUBLISHER',
     COUNT(tlau.title_id) AS 'TITLE COUNT'
 FROM
     authors AS au
@@ -37,7 +37,7 @@ SELECT
     au.au_id AS 'AUTHOR ID',
     au_lname AS 'LAST NAME',
     au_fname AS 'FIRST NAME',
-    COUNT(sl.qty) AS 'TOTAL'
+    SUM(sl.qty) AS 'TOTAL'
 FROM
     authors AS au
         INNER JOIN
@@ -55,7 +55,7 @@ SELECT
     au.au_id AS 'AUTHOR ID',
     au_lname AS 'LAST NAME',
     au_fname AS 'FIRST NAME',
-    COUNT(sl.qty) AS 'TOTAL'
+    COALESCE(SUM(sl.qty), 0) AS 'TOTAL'
 FROM
     authors AS au
         LEFT JOIN
