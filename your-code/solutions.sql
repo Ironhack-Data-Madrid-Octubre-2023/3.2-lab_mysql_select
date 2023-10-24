@@ -16,20 +16,19 @@ ON tit.pub_id = pub.pub_id;
 
 --- CHALLENGE 2 ---
 
-SELECT pubau.au_id AS 'AUTHOR ID', 
-	pubau.au_lname AS 'LAST NAME', 
-	pubau.au_fname AS 'FIRST NAME',
+SELECT 
+    au.au_id AS 'AUTHOR ID', 
+    au.au_lname AS 'LAST NAME', 
+    au.au_fname AS 'FIRST NAME',
     pub.pub_name AS 'PUBLISHER',
-    COUNT(tit.title) AS 'TITLE COUNT'
-    
-FROM publications.authors as pubau
-LEFT JOIN titleauthor AS titau
-ON pubau.au_id = titau.au_id
-INNER JOIN titles as tit
-ON titau.title_id = tit.title_id
-LEFT JOIN publishers as pub
-ON tit.pub_id = pub.pub_id
-GROUP BY tit.title
+    COUNT(tit.title) > 0 AS 'TITLE COUNT'
+FROM publications.authors as au
+LEFT JOIN titleauthor AS titau ON au.au_id = titau.au_id
+LEFT JOIN titles as tit ON titau.title_id = tit.title_id
+LEFT JOIN publishers as pub ON tit.pub_id = pub.pub_id
+GROUP BY au.au_id, au.au_fname, au.au_lname, pub.pub_name
+HAVING `TITLE COUNT`>0
+ORDER BY `TITLE COUNT` DESC;
 
 --- CHALLENGE 3 ---
 
