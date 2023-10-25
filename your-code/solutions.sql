@@ -37,4 +37,4 @@ FROM (authors
 LEFT JOIN titleauthor ON titleauthor.au_id = authors.au_id
 LEFT JOIN titles ON titles.title_id = titleauthor.title_id)
 GROUP BY authors.au_id, authors.au_lname, authors.au_fname
-ORDER BY SUM(titles.ytd_sales);
+ORDER BY SUM(titles.ytd_sales) DESC;
