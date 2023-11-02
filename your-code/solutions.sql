@@ -39,8 +39,7 @@ GROUP BY
 
     ##CHALLENGE 3
 
-
-
+    # PRIMERA PRESENTACION.
     SELECT 
     authors.au_id AS `AUTHOR ID`,
     authors.au_lname AS `LAST NAME`,
@@ -56,8 +55,30 @@ ORDER BY
     COUNT(titleauthor.title_id) DESC
 LIMIT 3;
 
+    # CORRECCION 2/11/23
+     ##CHALLENGE 3
+SELECT 
+    authors.au_id AS `AUTHOR ID`,
+    authors.au_lname AS `LAST NAME`,
+    authors.au_fname AS `FIRST NAME`,
+    SUM(sales.qty) AS `TOTAL`
+FROM 
+    authors
+JOIN 
+    titleauthor ON authors.au_id = titleauthor.au_id
+JOIN 
+    titles ON titleauthor.title_id = titles.title_id
+JOIN 
+    sales ON titles.title_id = sales.title_id
+GROUP BY 
+    authors.au_id, authors.au_lname, authors.au_fname
+ORDER BY 
+    SUM(sales.qty) 
+
 
 ## CHALLENGE 4
+
+# PRIMERA ENTREGA
 SELECT 
     authors.au_id AS 'AUTHOR ID',
     authors.au_lname AS 'LAST NAME',
@@ -71,3 +92,25 @@ GROUP BY
     authors.au_id
 ORDER BY 
     COALESCE(COUNT(titleauthor.title_id), 0) DESC;
+
+
+# CORRECCION 2/11/23
+## CHALENGE 4
+
+SELECT 
+    authors.au_id AS `AUTHOR ID`,
+    authors.au_lname AS `LAST NAME`,
+    authors.au_fname AS `FIRST NAME`,
+    COALESCE(SUM(sales.qty), 0) AS `TOTAL`
+FROM 
+    authors
+LEFT JOIN 
+    titleauthor ON authors.au_id = titleauthor.au_id
+LEFT JOIN 
+    titles ON titleauthor.title_id = titles.title_id
+LEFT JOIN 
+    sales ON titles.title_id = sales.title_id
+GROUP BY 
+    authors.au_id, authors.au_lname, authors.au_fname
+ORDER BY 
+    COALESCE(SUM(sales.qty), 0) DESC;
